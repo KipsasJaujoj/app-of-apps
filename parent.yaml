@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: apps
+    repoURL: https://github.com/KipsasJaujoj/app-of-apps
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
